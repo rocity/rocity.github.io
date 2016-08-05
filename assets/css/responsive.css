@@ -1,0 +1,33 @@
+
+    /* Medium Devices, Desktops */
+    @media only screen and (max-width : 870px) {
+        #container {
+            width: 600px;
+            height: 300px;
+        }
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (max-width : 768px) {
+
+    }
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (max-width : 480px) {
+
+    }
+
+    /* Custom, iPhone Retina */ 
+    @media only screen and (max-width : 360px) {
+        #front {
+            width: 310px !important;
+        }
+        #front img {
+          width: 300px;
+
+        }
+        .tt {
+            width: 300px !important;
+            margin: 0 auto;
+        }
+    }
