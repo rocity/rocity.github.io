@@ -1,12 +1,12 @@
 # Site settings
-title: Polar Bear
+title: ROCITY
 email: 
 description: > # this means to ignore newlines until "baseurl:"
   Jekyll Theme Demo
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://username.github.io" # the base hostname & protocol for your site
-twitter_username: username
-github_username: username
+url: "http://rocity.pw" # the base hostname & protocol for your site
+twitter_username: iamkvnpl
+github_username: rocity
 
 # Build settings
 markdown: redcarpet
