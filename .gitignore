@@ -1,0 +1,5 @@
+/_site
+.*
+!/.gitignore
+Gemfile.lock
+colors.md
