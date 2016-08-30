@@ -27,7 +27,15 @@
 
         }
         .tt {
-            width: 300px !important;
-            margin: 0 auto;
+            width: 100%;
+            margin: 5px auto;
+        }
+
+        #wrapper {
+            top: 100px;
+        }
+
+        #master-image {
+            width: 100%;
         }
     }

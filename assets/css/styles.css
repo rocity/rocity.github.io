@@ -3,6 +3,10 @@ body {
     background: url('../img/pattern.png') repeat-x scroll center top;
     overflow: hidden;
 }
+#wrapper {
+  position: relative;
+  top: 150px;
+}
 #container {
     width: 800px;
     height: 500px;
@@ -13,7 +17,7 @@ body {
 .ghost-button-semi-transparent {
   margin-top: 10px;
   display: inline-block;
-  width: 97px;
+  width: calc(25% - 3px);
   padding: 8px;
   color: #34495e;
   border: 2px solid #34495e;
