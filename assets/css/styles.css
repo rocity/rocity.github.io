@@ -1,16 +1,26 @@
 body {
     background-color: #bdc3c7 ;
     background: url('../img/pattern.png') repeat-x scroll center top;
-    overflow: hidden;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
+
+#wrapper,
+#about {
+    flex: 1;
+    width: 570px;
+    margin: 0 auto;
+}
+
 #wrapper {
   position: relative;
-  top: 150px;
+  padding-top: 150px;
 }
 
 #about {
   position: relative;
-  top: 50px;
+  padding-top: 50px;
 }
 
 #container {
@@ -97,11 +107,6 @@ body {
 
 #foot {
   background: url('../img/payong.jpg') repeat-x scroll center bottom;
-  position: absolute;
-  bottom: 0px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
   padding-bottom: 10px;
   color: #34495e;
   height: 77px;
