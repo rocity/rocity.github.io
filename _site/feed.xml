@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ROCITY</title>
+    <description>Something something..</description>
+    <link>http://rocity.pw</link>
+    <atom:link href="http://rocity.pw/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>The Reawakening</title>
+        <description>
+          
+          So… someone wants to read about my say on things. In all honesty, I have absolutely no idea what shit to write about. I promised to post something in the months to come anyway, so here goes nothing! Ideas are hard Maybe something about birds. Or otters. You’ll stay for...
+        </description>
+        <pubDate>Thu, 24 Nov 2016 00:00:00 +0800</pubDate>
+        <link>http://rocity.pw/2016-11-24-The-Reawakening/</link>
+        <guid isPermaLink="true">http://rocity.pw/2016-11-24-The-Reawakening/</guid>
+      </item>
+    
+  </channel>
+</rss>

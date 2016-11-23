@@ -1,3 +1,7 @@
-# @rocity's GitHub Page
+# Rocity
 
-A place to boast about a stellar amount of unfinished side-projects and more.
+Kevin Kalis' personal website and blog.
+
+# License
+
+This software is licensed under [The MIT License](./LICENSE)
