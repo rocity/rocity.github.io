@@ -17,3 +17,7 @@ There're 2 tickets left, these could probably be done in less that an hour, but 
 *Projected production of first video: Saturday (Jul 10, 2017)*
 
 **Onwards!**
+
+*edit: here's a peek of what I mostly did over the weekend*
+
+https://twitter.com/iamkvnpl/status/884071357293645824
