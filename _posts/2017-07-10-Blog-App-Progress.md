@@ -20,4 +20,5 @@ There're 2 tickets left, these could probably be done in less that an hour, but 
 
 *edit: here's a peek of what I mostly did over the weekend*
 
-https://twitter.com/iamkvnpl/status/884071357293645824
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The gang rewatched FMA.<br><br>We call this &quot;Oppa Mustang&quot; <a href="https://t.co/wzVfKcNgJt">pic.twitter.com/wzVfKcNgJt</a></p>&mdash; Kev 💻 (@iamkvnpl) <a href="https://twitter.com/iamkvnpl/status/884071357293645824">July 9, 2017</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
