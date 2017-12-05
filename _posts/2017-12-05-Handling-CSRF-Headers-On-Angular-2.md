@@ -30,7 +30,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
 export class InterceptorModule { }
 ```
 
-Nothing fancy here, just a plain interceptor. I based this code on how our company handled setting up CSRF tokens on headers with
+Nothing fancy here, just a plain interceptor. I based this code on how our team handled setting up CSRF tokens on headers with
 Angular 1.x projects. Fetch the csrftoken cookie, take the token there, slap it on every request the AngularJS app is sending to the API.
 
 Easy peasy, lemon squeezy.
