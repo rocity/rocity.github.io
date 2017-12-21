@@ -173,7 +173,7 @@ Next, let's add our css file to our webpage.
 
 On the very top of `monsterdb/templates/base.html`, load our staticfiles:
 
-```
+```html
 {% load staticfiles %}
 ```
 
@@ -181,7 +181,7 @@ This will enable the usage of *Django*'s `{% static %}` template tag.
 
 Once staticfiles are enabled, add our css file inside the `<head>` tag.
 
-```
+```html
 <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 ```
 
@@ -233,7 +233,7 @@ Open up `templates/base.html` and replace it with this code:
 
 
 **monsterdb/monsterdb/templates/base.html**
-```
+```html
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
