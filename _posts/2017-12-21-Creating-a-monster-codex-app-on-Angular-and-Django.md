@@ -174,7 +174,7 @@ Next, let's add our css file to our webpage.
 On the very top of `monsterdb/templates/base.html`, load our staticfiles:
 
 ```html
-{% load staticfiles %}
+{\% load staticfiles \%}
 ```
 
 This will enable the usage of *Django*'s `{% static %}` template tag.
