@@ -1,3 +1,4 @@
+{% raw %}
 # Creating a monster codex app on Angular and Django
 
 *Tempted to call this app Pokedex for old time's sake.*
@@ -174,7 +175,7 @@ Next, let's add our css file to our webpage.
 On the very top of `monsterdb/templates/base.html`, load our staticfiles:
 
 ```html
-{\% load staticfiles \%}
+{% load staticfiles %}
 ```
 
 This will enable the usage of *Django*'s `{% static %}` template tag.
@@ -264,3 +265,4 @@ Visit `http://127.0.0.1:8000` and you should see the running *Angular* app, host
 ### Setup Complete
 
 In the next blog post, we will tackle building an API and the components for our Monster codex app.
+{% endraw %}
