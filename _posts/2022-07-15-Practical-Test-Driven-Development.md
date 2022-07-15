@@ -10,11 +10,11 @@ I sound like a crazed TDD fanatic, do I? I just really love the concept of writi
 So why write tests? Why do I go on about convincing you to write tests for your software?
 
 Here is my current workflow when given a task as a programmer:
-Identify the problem
-Write the tests
-Write the function/logic (2 and 3 are interchangeable)
-Run the tests, following the Red-Green-Refactor methodology of testing
-Done
+1. Identify the problem
+2. Write the tests
+3. Write the function/logic (2 and 3 are interchangeable)
+4. Run the tests, following the Red-Green-Refactor methodology of testing
+5. Done
 
 The step `Write the tests` complements the step `Identify the problem`. How? In writing the tests, you are taught to write the test functions like this:
 
