@@ -65,3 +65,9 @@ Test setups can easily indicate what is needed for a logic/function to work.
 
 In conclusion: tests are like code comments, but more fleshed out *and the CI has to check them LOL*.
 Tests may consume a lot of time when writing, but they save your team from technical debt and acts as a form of documentation for your code. It saves your time by reducing the need for asking questions that are supposed to be already answered to other team members repeatedly over the course of a project over and over.
+
+
+
+Learn how we write our tests in TECHS! [TECHS](https://www.itstartechs.com/)
+
+![TECHS](https://static.wixstatic.com/media/3412fc_ee1aa07fec4e4650ae0b076d242edab9~mv2.png/v1/fill/w_127,h_32,al_c,lg_1,q_85,enc_auto/Techs%20logo.png)
