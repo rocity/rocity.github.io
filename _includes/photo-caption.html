@@ -1,0 +1,2 @@
+{%- assign photo = site.data.photos[include.id] -%}
+<figcaption class="f-micro">{{ include.id | upcase }}<br>({{ photo.date | date: '%b /%y' }})</figcaption>

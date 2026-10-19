@@ -8,3 +8,5 @@ _drafts
 .DS_Store
 Thumbs.db
 ehthumbs.db
+
+__private/*

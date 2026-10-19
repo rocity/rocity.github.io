@@ -1,0 +1,86 @@
+---
+layout: base
+---
+
+{% comment %}
+  The inverted chapter: paper type on ink, black-and-white photography.
+  All copy lives in the page's front matter; the page body is the closing
+  "Work" paragraph.
+{% endcomment %}
+
+<header class="bio-hero wrap grid">
+  <h1 class="bio-hero__mark f-hero" data-reveal="lines">
+    {% for word in page.greeting %}<span class="line"><span>{{ word }}{% if forloop.last %}<small class="orn">*</small>{% endif %}</span></span> {% endfor %}
+  </h1>
+
+  <p class="bio-hero__intro f-aside" data-split style="--d: 0.6s">{{ page.intro | markdownify | remove: '<p>' | remove: '</p>' | strip }}</p>
+
+  <div class="bio-hero__portrait">
+    {% include photo.html id=page.portrait sizes="(max-width: 580px) 76vw, 44vw" eager=true %}
+  </div>
+
+  <a class="bio-hero__down" href="#story" aria-label="Skip to the story" data-reveal="fade" style="--d: 1.2s"><span aria-hidden="true">↓</span></a>
+
+  <ul class="bio-hero__socials" data-reveal="fade" style="--d: 1.3s">
+    <li><a class="link" href="mailto:{{ site.author.email }}">Mail</a></li>
+    {% for social in site.social-links %}{% if page.socials contains social.name %}
+    <li><a class="link" href="{{ social.url }}" rel="me noopener" target="_blank">{{ social.name }}</a></li>
+    {% endif %}{% endfor %}
+  </ul>
+</header>
+
+<section class="pair section wrap grid" id="story" aria-label="Story">
+  <figure class="pair__media">
+    {% include photo.html id=page.story.photo sizes="(max-width: 580px) 84vw, 30vw" %}
+    {% include photo-caption.html id=page.story.photo %}
+  </figure>
+  <div class="pair__text f-lead" data-reveal="fade">
+    {{ page.story.text | markdownify }}
+  </div>
+</section>
+
+<section class="section wrap grid" aria-label="Pull quote">
+  <blockquote class="quote">
+    <p class="f-statement" data-split>“{{ page.quote.text }}”</p>
+    <cite class="quote__source f-micro" data-reveal="fade" style="--d: 0.5s">
+      <a class="link" href="{{ page.quote.url | relative_url }}">{{ page.quote.source }}</a>
+    </cite>
+  </blockquote>
+</section>
+
+<section class="section wrap grid" aria-labelledby="practice-title">
+  <div class="rail">{% include label.html text="Practice" %}</div>
+  <h2 class="field f-chapter" id="practice-title" data-reveal="lines">
+    {% for word in page.chapter %}<span class="line"><span>{{ word }}{% if forloop.last %}<small class="orn">®</small>{% endif %}</span></span> {% endfor %}
+  </h2>
+</section>
+
+<section class="section wrap grid" aria-labelledby="toolkit-label">
+  <div class="rail">{% include label.html text="Toolkit" id="toolkit-label" %}</div>
+  <div class="field accordion">
+    {% for skill in page.skills %}
+    {% assign slug = skill.group | slugify %}
+    <h3>
+      <button class="acc__btn" type="button" id="acc-{{ slug }}-btn" aria-expanded="false" aria-controls="acc-{{ slug }}">
+        <span class="f-label">{{ skill.group }}</span>
+        <span class="f-micro">{{ skill.items.size | prepend: '0' | slice: -2, 2 }}</span>
+        <span class="acc__arrow" aria-hidden="true">↙</span>
+      </button>
+    </h3>
+    <div class="acc__panel" id="acc-{{ slug }}" role="region" aria-labelledby="acc-{{ slug }}-btn">
+      <div class="acc__inner">
+        <ul class="acc__list f-lead">
+          {% for item in skill.items %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section wrap grid" aria-labelledby="work-label">
+  <div class="rail">{% include label.html text="Work" id="work-label" %}</div>
+  <div class="field work__text f-aside" data-reveal="fade">
+    {{ content }}
+  </div>
+</section>

@@ -1,5 +1,8 @@
-# Django Factoryboy UserFactory password
-
+---
+title: "Django Factoryboy UserFactory password"
+subtitle: "Giving a factory_boy UserFactory a password you can actually log in with."
+tags: [django, testing]
+---
 
 I keep forgetting how to set this, so I'll immortalize it here.
 

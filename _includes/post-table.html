@@ -1,0 +1,24 @@
+{% comment %}
+  Hairline index of posts: /year, title, topics, date, arrow.
+  Params: posts, id, more (rows shown before "Show More"; optional).
+{% endcomment %}
+<ol class="table" id="{{ include.id }}"{% if include.more %} data-more="{{ include.more }}"{% endif %}>
+  {% for post in include.posts %}
+  <li>
+    <a class="table__row" href="{{ post.url | relative_url }}">
+      <span class="table__year">/{{ post.date | date: '%y' }}</span>
+      <span class="table__title">{{ post.title }}</span>
+      <span class="table__topic f-micro">{{ post.tags | join: ', ' }}</span>
+      <time class="table__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%d.%m' }}</time>
+      <span class="table__arrow" aria-hidden="true">↗</span>
+    </a>
+  </li>
+  {% endfor %}
+</ol>
+{% if include.more and include.posts.size > include.more %}
+<p class="table__more">
+  <button class="action" type="button" aria-controls="{{ include.id }}" aria-expanded="false" data-more-toggle hidden>
+    <span aria-hidden="true">↓</span><span class="link">Show More</span>
+  </button>
+</p>
+{% endif %}

@@ -14,51 +14,53 @@ baseurl: ""
 # Of course don't forget to change the username and projectname to YOUR username and project
 
 # Name of website
-title: KEVIN KALIS
+title: Kevin Kalis
 
 # Short description of your site
 description: Software engineering
 
-# --- Navigation bar options --- #
+# --- Navigation --- #
 
-# List of links in the navigation bar
-navbar-links:
-  About Me: "aboutme"
-  Author's home: "https://kevkalis.com"
+# Three words floating on the canvas: left group, right group.
+nav:
+  left:
+    - title: Writing
+      url: /
+    - title: Bio
+      url: /aboutme
+  right:
+    - title: Contact
+      url: "#contact"
 
-# Image to show in the navigation bar - image must be a square (width = height)
-# Remove this parameter if you don't want an image in the navbar
-avatar: "/img/7n0xl3dE.jpg"
+# Used for social share images when a page has no share-img
+avatar: "/img/photos/avatar-1600.jpg"
 
-# --- Footer options --- #
+# --- Author & contact --- #
 
 # Change all these values or delete the ones you don't want.
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
   name: Kevin Kalis
-  email: "kevinpaulkalis@gmail.com"
-  facebook: iamkvnpl  # eg. daattali
+  email: "hello@kevkalis.com"
   github: rocity    # eg. daattali
-  twitter: iamkvnpl   # eg. daattali
-  stackoverflow: 2331182/burning-crystals  # eg. "3943160/daattali"
-  spotify: iamkvnpl   # eg. daattali
 
-# Select which links to show in the footer
-footer-links-active:
-  rss: false
-  facebook: true
-  email: false
-  twitter: true
-  google-plus: false
-  github: true
-  reddit: false
-  linkedin: false
-  xing: false
-  stackoverflow: true
-  snapchat: false
-  instagram: false
-  youtube: false
-  spotify: true
+# Rows in the contact section (every page) and the bio hero
+social-links:
+  - name: GitHub
+    handle: rocity
+    url: https://github.com/rocity
+  - name: LinkedIn
+    handle: kevin-kalis
+    url: https://www.linkedin.com/in/kevin-kalis-a457a2138/
+  - name: Upwork
+    handle: Kevin K.
+    url: https://www.upwork.com/freelancers/~01784059535635eaaa
+
+# The dry line above "Get in touch"
+contact-aside: "(I answer email faster than I finish side projects. Low bar, but it's a bar.)"
+
+# Footer credit link
+source-url: https://github.com/rocity/rocity.github.io
 
 # Select which share links to show in posts
 share-links-active:
@@ -66,10 +68,6 @@ share-links-active:
   facebook: true
   google: false
   linkedin: true
-
-# How to display the link to the website in the footer
-# Remove this if you don't want a link in the footer
-url-pretty: "kevkalis.com"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Misc --- #
 # Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
@@ -92,7 +90,6 @@ timezone: "Asia/Manila"
 markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
-paginate: 5
 
 kramdown:
   input: GFM
@@ -112,7 +109,6 @@ defaults:
       path: "" # all files
     values:
       layout: "page"
-      show-avatar: true
 
 # Use tags pages (not recommended if you are deploying via GitHub pages, only set to true if deploying locally with ruby)
 link-tags: false
@@ -171,8 +167,6 @@ prose:
           label: "Publish"
           help: "Check to publish post, uncheck to hide."
 
-gems:
-  - jekyll-paginate
 
 # Beautiful Jekyll / Dean Attali
 # 2fc73a3a967e97599c9763d05e564189

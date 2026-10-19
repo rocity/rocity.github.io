@@ -1,4 +1,8 @@
-# Running an AWS Lambda Function inside a VPC with access to the internet, RDS, S3, and Secrets Manager
+---
+title: "Running an AWS Lambda Function inside a VPC with access to the internet, RDS, S3, and Secrets Manager"
+subtitle: "Subnets, a NAT gateway, VPC peering, and the security group rules that tie them together."
+tags: [aws]
+---
 
 Given a scenario:
 

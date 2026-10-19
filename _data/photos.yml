@@ -1,0 +1,72 @@
+# Photos, served from /img/photos/<id>-1000.jpg and <id>-1600.jpg.
+# width/height are the 1600px version's, so the browser can reserve space.
+#
+# Originals live outside the repo. To add one:
+#   sips -Z 1000 -s format jpeg -s formatOptions 76 IN.jpg --out img/photos/<id>-1000.jpg
+#   sips -Z 1600 -s format jpeg -s formatOptions 70 IN.jpg --out img/photos/<id>-1600.jpg
+
+avatar:
+  alt: Self-portrait — Kevin photographing himself in a broken mirror on a hand-painted “Power Tools” sign
+  date: 2025-04-27
+  width: 1600
+  height: 1066
+
+kpk09950:
+  alt: A man crossing curving tram tracks at a wide, empty intersection
+  date: 2025-05-27
+  width: 1600
+  height: 1066
+
+dsc03357:
+  alt: Two boys grinning and striking poses against a cracked white wall
+  date: 2024-04-20
+  width: 1600
+  height: 1066
+
+kpk02385:
+  alt: A woman in a striped dress posing on a low stone wall under power lines
+  date: 2026-01-31
+  width: 900
+  height: 1600
+
+kpk01068:
+  alt: A shirtless skateboarder pushing off in a plaza, friends sitting on the ground behind him
+  date: 2025-10-18
+  width: 1600
+  height: 1066
+
+kpk01823:
+  alt: A woman's hair clip in focus as traffic streaks past behind her
+  date: 2026-01-10
+  width: 1600
+  height: 669
+
+dsc03636:
+  alt: An older man in a short-sleeved shirt looking into the camera on a city sidewalk
+  date: 2024-04-20
+  width: 1066
+  height: 1600
+
+kpk02833:
+  alt: A man in a cap walking his bicycle across a pedestrian crossing
+  date: 2026-03-21
+  width: 1600
+  height: 669
+
+dsc01475:
+  alt: A vendor lit by a single hanging bulb at a night stall, looking up from his work
+  date: 2024-03-16
+  width: 1600
+  height: 1066
+
+kpk09933:
+  alt: A man pushing a trolley across tram tracks, framed by a tram window
+  date: 2025-05-27
+  width: 1600
+  height: 1066
+
+dsc03679:
+  alt: Two young men leaning on a railing beneath an overpass, one glancing back at the camera
+  date: 2024-04-20
+  width: 1600
+  height: 1066

@@ -1,0 +1,23 @@
+<section class="contact section wrap grid" id="contact" aria-labelledby="contact-title">
+  <div class="rail">{% include label.html text="Contact" %}</div>
+
+  <p class="contact__aside f-aside" data-split>{{ site.contact-aside }}</p>
+
+  <h2 class="contact__cta f-display" id="contact-title" data-reveal="lines">
+    <a class="cta" href="mailto:{{ site.author.email }}"><span class="line"><span>Get in touch</span></span></a>
+  </h2>
+
+  <a class="contact__email link" href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
+
+  <ul class="contact__rows rows">
+    {% for social in site.social-links %}
+    <li>
+      <a class="row" href="{{ social.url }}" rel="me noopener" target="_blank">
+        <span class="f-label">{{ social.name }}</span>
+        <span>{{ social.handle }}</span>
+        <span class="row__arrow" aria-hidden="true">↗</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>

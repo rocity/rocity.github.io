@@ -1,1 +1,20 @@
-bundle exec jekyll serve --config _config.yml,_config_dev.yml
+#!/bin/sh
+# Serve the site at http://localhost:4000 with GitHub Pages' Jekyll, in Docker.
+# Gems are cached in the "jekyll-gems" volume; the first run installs them.
+cd "$(dirname "$0")" || exit 1
+
+docker volume inspect jekyll-gems >/dev/null 2>&1 || {
+  docker volume create jekyll-gems >/dev/null
+  docker run --rm -v jekyll-gems:/usr/local/bundle ruby:3.1 \
+    gem install github-pages webrick --no-document
+}
+
+# -it only when attached to a terminal (so ctrl-c works); plain otherwise.
+[ -t 0 ] && tty_flags="-it" || tty_flags=""
+
+exec docker run --rm $tty_flags -p 4000:4000 \
+  -e JEKYLL_NO_BUNDLER_REQUIRE=true \
+  -v jekyll-gems:/usr/local/bundle \
+  -v "$PWD":/src -w /src \
+  ruby:3.1 \
+  jekyll serve --host 0.0.0.0 --config _config.yml,_config_dev.yml --force_polling "$@"

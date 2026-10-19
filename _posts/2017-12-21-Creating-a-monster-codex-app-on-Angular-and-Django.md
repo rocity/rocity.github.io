@@ -1,6 +1,10 @@
-{% raw %}
-# Creating a monster codex app on Angular and Django
+---
+title: "Creating a monster codex app on Angular and Django"
+subtitle: "Setting up Angular 5 to run together with a Django backend."
+tags: [angular, django]
+---
 
+{% raw %}
 *Tempted to call this app Pokedex for old time's sake.*
 
 This will guide you through setting up Angular 5 to run together with a Django backend.

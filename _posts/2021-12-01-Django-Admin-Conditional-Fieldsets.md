@@ -1,4 +1,8 @@
-# Django Admin - Conditional Fieldsets
+---
+title: "Django Admin — Conditional Fieldsets"
+subtitle: "Showing different admin fieldsets to different users by overriding get_fieldsets."
+tags: [django]
+---
 
 ```python
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin

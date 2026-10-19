@@ -1,13 +1,16 @@
 ---
-layout: default
+layout: base
 title: 404 - Page not found
 permalink: /404.html
+theme: dark
+contact: false
 ---
 
-<div class="text-center">
-  <h1>Whoops, this page doesn't exist.</h1>
-  <h1>Move along. (404 error)</h1>
-  <br/>
-
-  <img src="{{ site.baseurl }}/img/404-southpark.jpg" />
-</div>
+<section class="lost wrap grid">
+  <h1 class="lost__mark f-hero" data-reveal="lines">
+    <span class="line"><span>Dead</span></span>
+    <span class="line"><span>end<small class="orn">404</small></span></span>
+  </h1>
+  <p class="lost__aside f-aside" data-split style="--d: 0.6s">(This page doesn't exist. Or it did, and I quietly deleted it out of embarrassment.)</p>
+  <a class="lost__back action" href="{{ '/' | relative_url }}" data-reveal="fade" style="--d: 1s"><span aria-hidden="true">←</span><span class="link">Back to the writing</span></a>
+</section>

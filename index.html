@@ -1,64 +1,95 @@
 ---
-layout: page
-title: KEV KALIS
-subtitle: Software Engineering
+layout: base
+handle: rocity
+bio: >-
+  Software engineer based in the Philippines.<br>
+stack: [Field, Notes]
+# Photos from _data/photos.yml, staggered on the 12-column grid.
+# col: desktop columns; mcol: columns under 580px (default full width);
+# end: true sits a tile on the bottom edge of its row.
+photos:
+  - { id: kpk09950, col: 4 / 11 }
+  - { id: dsc03357, col: 3 / 8 }
+  - { id: kpk02385, col: 8 / 10, end: true, mcol: 1 / 7 }
+  - { id: kpk01068, col: 7 / 12, mcol: 7 / -1, end: true }
+  - { id: kpk01823, col: 2 / 9 }
+  - { id: dsc03636, col: 9 / 12, end: true, mcol: 4 / -1 }
+  - { id: kpk02833, col: 5 / 12 }
+  - { id: dsc01475, col: 3 / 8, mcol: 1 / 7 }
+  - { id: kpk09933, col: 8 / 11, end: true, mcol: 7 / -1 }
 ---
-<div class="text-center">
-  <img src="{{ site.baseurl }}/img/cat-1634369_640.jpg" />
-</div>
-<div class="posts-list">
-  {% for post in paginator.posts %}
-  <article class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-	  <h2 class="post-title">{{ post.title }}</h2>
 
-	  {% if post.subtitle %}
-	  <h3 class="post-subtitle">
-	    {{ post.subtitle }}
-	  </h3>
-	  {% endif %}
-    </a>
+{% assign latest = site.posts.first %}
+{% assign first_post = site.posts.last %}
+{% assign first_year = first_post.date | date: '%Y' | plus: 0 %}
+{% assign this_year = site.time | date: '%Y' | plus: 0 %}
+{% assign years = this_year | minus: first_year %}
 
-    <p class="post-meta">
-      Posted on {{ post.date | date: "%B %-d, %Y" }}
+<header class="hero wrap grid">
+  <h1 class="hero__mark f-hero" data-reveal="lines">
+    <span class="line"><span>Kevin</span></span>
+    <span class="line"><span>Kalis</span></span>
+  </h1>
+
+  <a class="hero__email link" href="mailto:{{ site.author.email }}" data-reveal="fade" style="--d: 1.1s">{{ site.author.email }}</a>
+
+  <p class="hero__stack f-stack" data-reveal="lines" style="--d: 0.5s">
+    {% for word in page.stack %}<span class="line"><span>{{ word }}</span></span> {% endfor %}
+    <span class="line"><span>{{ site.time | date: '%Y' }}<small class="orn">©</small></span></span>
+  </p>
+
+  <div class="hero__aside" data-reveal="fade" style="--d: 1.2s">
+    <p class="hero__handle f-aside"><span class="spin" aria-hidden="true">*</span> ({{ page.handle }})</p>
+    <p class="hero__bio">{{ page.bio }}</p>
+  </div>
+</header>
+
+<section class="section wrap grid" id="writing" aria-labelledby="latest-label">
+  <div class="rail">{% include label.html text="Latest" id="latest-label" %}</div>
+  <article class="field latest">
+    <p class="latest__meta f-micro">
+      /{{ latest.date | date: '%y' }} — <time datetime="{{ latest.date | date_to_xmlschema }}">{{ latest.date | date: '%-d %b %Y' }}</time>
     </p>
-
-    <div class="post-entry">
-      {{ post.excerpt | strip_html | xml_escape | truncatewords: site.excerpt_length }}
-      {% assign excerpt_word_count = post.excerpt | number_of_words %}
-      {% if post.content != post.excerpt or excerpt_word_count > site.excerpt_length %}
-        <a href="{{ post.url | prepend: site.baseurl }}" class="post-read-more">[Read&nbsp;More]</a>
-      {% endif %}
-    </div>
-
-    {% if post.tags.size > 0 %}
-    <div class="blog-tags">
-      Tags:
-      {% if site.link-tags %}
-      {% for tag in post.tags %}
-      <a href="{{ site.baseurl }}/tag/{{ tag }}">{{ tag }}</a>
-      {% endfor %}
-      {% else %}
-        {{ post.tags | join: ", " }}
-      {% endif %}
-    </div>
+    <h2 class="latest__title f-statement">
+      <a href="{{ latest.url | relative_url }}" data-split>{{ latest.title }}</a>
+    </h2>
+    {% if latest.subtitle %}
+    <p class="latest__excerpt f-lead" data-split>{{ latest.subtitle }}</p>
     {% endif %}
+    <p class="latest__more" data-reveal="fade">
+      <a class="action" href="{{ latest.url | relative_url }}"><span aria-hidden="true">↗</span><span class="link">Read it</span></a>
+    </p>
+  </article>
+</section>
 
-   </article>
+<section class="section wrap grid" aria-labelledby="archive-label">
+  <div class="rail">{% include label.html text="Archive" id="archive-label" %}</div>
+  <div class="field">
+    {% include post-table.html posts=site.posts id="archive" more=5 %}
+  </div>
+</section>
+
+<section class="section wrap grid" aria-labelledby="since-label">
+  <div class="rail">{% capture since %}Since /{{ first_post.date | date: '%y' }}{% endcapture %}{% include label.html text=since id="since-label" %}</div>
+  <div class="field">
+    <p class="stat f-chapter" data-reveal="lines">
+      <span class="line"><span><span class="roll" data-roll>{{ years }}</span> years</span></span>
+    </p>
+    <p class="stat__caption f-micro" data-reveal="fade" style="--d: 0.6s">
+      {{ site.posts.size }} posts — writing things down<br>so I stop googling them twice
+    </p>
+  </div>
+</section>
+
+<section class="collage section wrap grid" aria-labelledby="photos-label">
+  <div class="rail">
+    {% include label.html text="Off the clock" id="photos-label" %}
+    <p class="rail__note f-micro">(Street photography.<br>Mostly Saturdays.)</p>
+  </div>
+  {% for shot in page.photos %}
+  <figure class="tile{% if shot.end %} tile--end{% endif %}" style="--col: {{ shot.col }}{% if shot.mcol %}; --mcol: {{ shot.mcol }}{% endif %}">
+    {% include photo.html id=shot.id sizes="(max-width: 580px) 84vw, 50vw" %}
+    {% include photo-caption.html id=shot.id %}
+  </figure>
   {% endfor %}
-</div>
-
-{% if paginator.total_pages > 1 %}
-<ul class="pager main-pager">
-  {% if paginator.previous_page %}
-  <li class="previous">
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
-  </li>
-  {% endif %}
-  {% if paginator.next_page %}
-  <li class="next">
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
-  </li>
-  {% endif %}
-</ul>
-{% endif %}
+</section>

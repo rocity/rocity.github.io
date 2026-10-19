@@ -1,3 +1,9 @@
+---
+title: "Handling CSRF Headers on Angular 2"
+subtitle: "Twenty-four lines of interceptor, or four lines of config. Guess which one I wrote first."
+tags: [angular, django]
+---
+
 ## Angular 2.x and Django
 
 I've been working with Angular 2.x for about a couple of months now.

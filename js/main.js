@@ -1,138 +1,238 @@
-// Dean Attali / Beautiful Jekyll 2016
+// Site motion and interaction. No dependencies.
+//
+//   data-split          split an element's rendered lines into rising masks
+//   data-reveal="..."   lines | fade | media — animate in when scrolled to
+//   data-roll           odometer digits
+//   data-more           collapse a long list behind "Show More"
+//   .acc__btn           accordion rows
+//   .wipe               ink panel between page loads
 
-var main = {
+(function () {
+  'use strict';
 
-  bigImgEl : null,
-  numImgs : null,
+  var root = document.documentElement;
+  root.classList.add('motion');
 
-  init : function() {
-    // Shorten the navbar after scrolling a little bit down
-    $(window).scroll(function() {
-        if ($(".navbar").offset().top > 50) {
-            $(".navbar").addClass("top-nav-short");
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var toArray = function (list) { return Array.prototype.slice.call(list); };
+  var $$ = function (selector, scope) { return toArray((scope || document).querySelectorAll(selector)); };
+
+
+  /* Line splitting --------------------------------------------------------- */
+
+  // Wraps each rendered line of `el` in an overflow-hidden mask. Text is split
+  // by word; inline elements (links, <strong>, ornaments) stay whole. Once the
+  // reveal has played, the original markup is restored so text reflows
+  // naturally on resize.
+  function splitLines(el) {
+    var original = el.innerHTML;
+
+    toArray(el.childNodes).forEach(function (node) {
+      if (node.nodeType !== 3) return;
+      var fragment = document.createDocumentFragment();
+      node.textContent.split(/(\s+)/).forEach(function (part) {
+        if (!part) return;
+        if (/^\s+$/.test(part)) {
+          fragment.appendChild(document.createTextNode(' '));
         } else {
-            $(".navbar").removeClass("top-nav-short");
-        }
-    });
-    
-    // On mobile, hide the avatar when expanding the navbar menu
-    $('#main-navbar').on('show.bs.collapse', function () {
-      $(".navbar").addClass("top-nav-expanded");
-    });
-    $('#main-navbar').on('hidden.bs.collapse', function () {
-      $(".navbar").removeClass("top-nav-expanded");
-    });
-	
-    // On mobile, when clicking on a multi-level navbar menu, show the child links
-    $('#main-navbar').on("click", ".navlinks-parent", function(e) {
-      var target = e.target;
-      $.each($(".navlinks-parent"), function(key, value) {
-        if (value == target) {
-          $(value).parent().toggleClass("show-children");
-        } else {
-          $(value).parent().removeClass("show-children");
+          var word = document.createElement('span');
+          word.textContent = part;
+          fragment.appendChild(word);
         }
       });
+      el.replaceChild(fragment, node);
     });
-    
-    // Ensure nested navbar menus are not longer than the menu header
-    var menus = $(".navlinks-container");
-    if (menus.length > 0) {
-      var navbar = $("#main-navbar ul");
-      var fakeMenuHtml = "<li class='fake-menu' style='display:none;'><a></a></li>";
-      navbar.append(fakeMenuHtml);
-      var fakeMenu = $(".fake-menu");
 
-      $.each(menus, function(i) {
-        var parent = $(menus[i]).find(".navlinks-parent");
-        var children = $(menus[i]).find(".navlinks-children a");
-        var words = [];
-        $.each(children, function(idx, el) { words = words.concat($(el).text().trim().split(/\s+/)); });
-        var maxwidth = 0;
-        $.each(words, function(id, word) {
-          fakeMenu.html("<a>" + word + "</a>");
-          var width =  fakeMenu.width();
-          if (width > maxwidth) {
-            maxwidth = width;
-          }
-        });
-        $(menus[i]).css('min-width', maxwidth + 'px')
-      });
+    var lines = [];
+    var current = null;
+    var lastTop = null;
+    toArray(el.childNodes).forEach(function (node) {
+      if (node.nodeName === 'BR') return el.removeChild(node);
+      if (node.nodeType === 1 && (lastTop === null || node.offsetTop > lastTop + 2)) {
+        lastTop = node.offsetTop;
+        current = [];
+        lines.push(current);
+      }
+      if (current) current.push(node);
+    });
 
-      fakeMenu.remove();
-    }        
-    
-    // show the big header image	
-    main.initImgs();
-  },
-  
-  initImgs : function() {
-    // If the page was large images to randomly select from, choose an image
-    if ($("#header-big-imgs").length > 0) {
-      main.bigImgEl = $("#header-big-imgs");
-      main.numImgs = main.bigImgEl.attr("data-num-img");
+    el.textContent = '';
+    lines.forEach(function (nodes, i) {
+      var mask = document.createElement('span');
+      var inner = document.createElement('span');
+      mask.className = 'line';
+      inner.style.setProperty('--i', i);
+      nodes.forEach(function (node) { inner.appendChild(node); });
+      mask.appendChild(inner);
+      el.appendChild(mask);
+      el.appendChild(document.createTextNode(' '));
+    });
 
-          // 2fc73a3a967e97599c9763d05e564189
-	  // set an initial image
-	  var imgInfo = main.getImgInfo();
-	  var src = imgInfo.src;
-	  var desc = imgInfo.desc;
-  	  main.setImg(src, desc);
-  	
-	  // For better UX, prefetch the next image so that it will already be loaded when we want to show it
-  	  var getNextImg = function() {
-	    var imgInfo = main.getImgInfo();
-	    var src = imgInfo.src;
-	    var desc = imgInfo.desc;		  
-	    
-		var prefetchImg = new Image();
-  		prefetchImg.src = src;
-		// if I want to do something once the image is ready: `prefetchImg.onload = function(){}`
-		
-  		setTimeout(function(){
-                  var img = $("<div></div>").addClass("big-img-transition").css("background-image", 'url(' + src + ')');
-  		  $(".intro-header.big-img").prepend(img);
-  		  setTimeout(function(){ img.css("opacity", "1"); }, 50);
-		  
-		  // after the animation of fading in the new image is done, prefetch the next one
-  		  //img.one("transitioned webkitTransitionEnd oTransitionEnd MSTransitionEnd", function(){
-		  setTimeout(function() {
-		    main.setImg(src, desc);
-			img.remove();
-  			getNextImg();
-		  }, 1000); 
-  		  //});		
-  		}, 6000);
-  	  };
-	  
-	  // If there are multiple images, cycle through them
-	  if (main.numImgs > 1) {
-  	    getNextImg();
-	  }
-    }
-  },
-  
-  getImgInfo : function() {
-  	var randNum = Math.floor((Math.random() * main.numImgs) + 1);
-    var src = main.bigImgEl.attr("data-img-src-" + randNum);
-	var desc = main.bigImgEl.attr("data-img-desc-" + randNum);
-	
-	return {
-	  src : src,
-	  desc : desc
-	}
-  },
-  
-  setImg : function(src, desc) {
-	$(".intro-header.big-img").css("background-image", 'url(' + src + ')');
-	if (typeof desc !== typeof undefined && desc !== false) {
-	  $(".img-desc").text(desc).show();
-	} else {
-	  $(".img-desc").hide();  
-	}
+    el.classList.add('is-split');
+    if (!el.hasAttribute('data-reveal')) el.setAttribute('data-reveal', 'lines');
+
+    el.addEventListener('revealed', function () {
+      var delay = parseFloat(getComputedStyle(el).getPropertyValue('--d')) || 0;
+      setTimeout(function () { el.innerHTML = original; }, (delay + 0.1 * lines.length + 2) * 1000);
+    }, { once: true });
   }
-};
 
-// 2fc73a3a967e97599c9763d05e564189
 
-document.addEventListener('DOMContentLoaded', main.init);
+  /* Rolling numbers ------------------------------------------------------- */
+
+  function buildRoll(el) {
+    var value = el.textContent.trim();
+    el.textContent = '';
+
+    var label = document.createElement('span');
+    label.className = 'sr-only';
+    label.textContent = value;
+    el.appendChild(label);
+
+    value.split('').forEach(function (char, i) {
+      if (!/\d/.test(char)) {
+        el.appendChild(document.createTextNode(char));
+        return;
+      }
+      var col = document.createElement('span');
+      var strip = document.createElement('span');
+      col.className = 'roll__col';
+      col.setAttribute('aria-hidden', 'true');
+      strip.className = 'roll__strip';
+      // Two passes of 0–9 so every digit travels, even a zero.
+      for (var n = 0; n < 20; n++) {
+        var digit = document.createElement('span');
+        digit.textContent = n % 10;
+        strip.appendChild(digit);
+      }
+      strip.style.setProperty('--n', 10 + Number(char));
+      strip.style.setProperty('--i', i);
+      col.appendChild(strip);
+      el.appendChild(col);
+    });
+  }
+
+
+  /* Reveal on scroll ------------------------------------------------------- */
+
+  function reveal(el) {
+    el.classList.add('is-in');
+    el.dispatchEvent(new CustomEvent('revealed'));
+    if (el.getAttribute('data-reveal') === 'media') {
+      setTimeout(function () { el.classList.add('is-done'); }, 1900);
+    }
+  }
+
+  function observeReveals() {
+    var targets = $$('[data-reveal]');
+    if (reduced || !('IntersectionObserver' in window)) {
+      targets.forEach(reveal);
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        reveal(entry.target);
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+    targets.forEach(function (el) { observer.observe(el); });
+  }
+
+
+  /* Show more -------------------------------------------------------------- */
+
+  $$('[data-more]').forEach(function (list) {
+    var limit = Number(list.getAttribute('data-more'));
+    var button = document.querySelector('[aria-controls="' + list.id + '"][data-more-toggle]');
+    var hidden = toArray(list.children).slice(limit);
+    if (!button || !hidden.length) return;
+
+    hidden.forEach(function (item) { item.hidden = true; });
+    button.hidden = false;
+
+    button.addEventListener('click', function () {
+      hidden.forEach(function (item, i) {
+        item.hidden = false;
+        item.setAttribute('data-reveal', 'fade');
+        item.style.setProperty('--d', (i * 0.08) + 's');
+        requestAnimationFrame(function () { requestAnimationFrame(function () { reveal(item); }); });
+      });
+      button.setAttribute('aria-expanded', 'true');
+      button.parentNode.hidden = true;
+      hidden[0].querySelector('a').focus({ preventScroll: true });
+    });
+  });
+
+
+  /* Accordion -------------------------------------------------------------- */
+
+  $$('.acc__btn').forEach(function (button) {
+    var panel = document.getElementById(button.getAttribute('aria-controls'));
+    button.addEventListener('click', function () {
+      var open = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', String(open));
+      panel.classList.toggle('is-open', open);
+    });
+  });
+
+
+  /* Page wipe -------------------------------------------------------------- */
+
+  function wipeColor() {
+    return document.body.classList.contains('theme-dark') ? 'paper' : 'ink';
+  }
+
+  document.addEventListener('click', function (event) {
+    if (reduced || event.defaultPrevented || event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    var link = event.target.closest('a[href]');
+    if (!link || link.target || link.hasAttribute('download')) return;
+
+    var url = new URL(link.href, location.href);
+    if (url.origin !== location.origin) return;
+    if (url.pathname === location.pathname && url.search === location.search) return;
+
+    event.preventDefault();
+    root.setAttribute('data-wipe', wipeColor());
+    root.classList.add('is-leaving');
+    setTimeout(function () {
+      try { sessionStorage.setItem('wipe', root.getAttribute('data-wipe')); } catch (e) {}
+      location.href = url.href;
+    }, 1000);
+  });
+
+  // Coming back via the back button restores the page mid-wipe; clear it.
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted) root.classList.remove('is-leaving', 'is-arriving', 'is-arrived');
+  });
+
+
+  /* Boot -------------------------------------------------------------------- */
+
+  // Lines can only be measured once the webfont has loaded.
+  var fontsReady = document.fonts && document.fonts.ready
+    ? Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 1500); })])
+    : Promise.resolve();
+
+  fontsReady.then(function () {
+    if (!reduced) {
+      $$('[data-split]').forEach(splitLines);
+      $$('[data-roll]').forEach(buildRoll);
+      $$('[data-reveal-children] > *').forEach(function (el) {
+        if (!el.hasAttribute('data-reveal')) el.setAttribute('data-reveal', 'fade');
+      });
+    }
+
+    var arriving = root.classList.contains('is-arriving');
+    if (arriving) {
+      requestAnimationFrame(function () { root.classList.add('is-arrived'); });
+      setTimeout(function () { root.classList.remove('is-arriving', 'is-arrived'); }, 1300);
+    }
+
+    root.classList.add('is-ready');
+    // Let the panel clear the hero before its type starts to rise.
+    setTimeout(observeReveals, arriving ? 350 : 60);
+  });
+})();

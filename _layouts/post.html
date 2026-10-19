@@ -2,51 +2,60 @@
 layout: base
 ---
 
-{% include header.html type="post" %}
+{% assign words = content | number_of_words %}
+{% assign minutes = words | plus: 100 | divided_by: 200 | at_least: 1 %}
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-      <article role="main" class="blog-post">
-        {{ content }}
-      </article>
-
+<article class="post">
+  <header class="post-head wrap grid">
+    <div class="rail">
+      {% capture year %}/{{ page.date | date: '%y' }}{% endcapture %}
+      {% include label.html text=year %}
+      <p class="post-head__date f-micro">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%-d %b %Y' }}</time><br>
+        {{ minutes }} min read
+      </p>
+    </div>
+    <div class="field">
+      <h1 class="f-title" data-split>{{ page.title }}</h1>
+      {% if page.subtitle %}<p class="post-head__sub f-aside" data-split>({{ page.subtitle }})</p>{% endif %}
       {% if page.tags.size > 0 %}
-        <div class="blog-tags">
-          Tags:
-          {% if site.link-tags %}
-          {% for tag in page.tags %}
-            <a href="/tag/{{ tag }}">{{ tag }}</a>
-          {% endfor %}
-          {% else %}
-            {{ page.tags | join: ", " }}
-          {% endif %}
-        </div>
-      {% endif %}
-
-      {% if page.social-share %}
-        {% include social-share.html %}
-      {% endif %}
-
-      <ul class="pager blog-pager">
-        {% if page.previous.url %}
-        <li class="previous">
-          <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
-        </li>
-        {% endif %}
-        {% if page.next.url %}
-        <li class="next">
-          <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
-        </li>
-        {% endif %}
-      </ul>
-
-      {% if page.comments %}
-        <div class="disqus-comments">
-          {% include disqus.html %}
-        </div>
+      <p class="post-head__tags f-micro">
+        {% for tag in page.tags %}{% if site.link-tags %}<a class="link" href="{{ '/tag/' | append: tag | relative_url }}">{{ tag }}</a>{% else %}{{ tag }}{% endif %}{% unless forloop.last %} / {% endunless %}{% endfor %}
+      </p>
       {% endif %}
     </div>
+  </header>
+
+  <div class="post-body wrap grid">
+    <div class="prose" data-reveal-children>
+      {{ content }}
+    </div>
   </div>
-</div>
+
+  <footer class="post-foot wrap grid">
+    {% if page.social-share %}
+      {% include social-share.html %}
+    {% endif %}
+
+    {% if page.previous.url or page.next.url %}
+    <nav class="pager" aria-label="More posts">
+      {% if page.previous.url %}
+      <a class="pager__link" href="{{ page.previous.url | relative_url }}" rel="prev">
+        <span class="f-label">← Previous</span>
+        <span class="pager__title f-aside">{{ page.previous.title }}</span>
+      </a>
+      {% endif %}
+      {% if page.next.url %}
+      <a class="pager__link pager__link--next" href="{{ page.next.url | relative_url }}" rel="next">
+        <span class="f-label">Next →</span>
+        <span class="pager__title f-aside">{{ page.next.title }}</span>
+      </a>
+      {% endif %}
+    </nav>
+    {% endif %}
+
+    {% if page.comments and site.disqus %}
+    <div class="prose">{% include disqus.html %}</div>
+    {% endif %}
+  </footer>
+</article>

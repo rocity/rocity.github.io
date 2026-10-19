@@ -1,5 +1,8 @@
-# Practical Test Driven Development
-
+---
+title: "Practical Test Driven Development"
+subtitle: "Why I write tests, and why they're more than \"just tests.\""
+tags: [testing, django]
+---
 
 Most programmers would say that writing tests is a waste of time, that it is taking precious hours that could have been spent on the *actual* problem solving, that *"they're just tests."*
 
