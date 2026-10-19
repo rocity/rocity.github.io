@@ -1,0 +1,14 @@
+{%- comment -%}
+  Hugeicons (stroke rounded, MIT) as inline SVG. Inherits color and scales with font-size.
+  Usage: {% include icon.html name="arrow-up-right" %}
+{%- endcomment -%}
+{%- assign d = '' -%}
+{%- case include.name -%}
+  {%- when 'arrow-up-right' -%}{%- capture d -%}<path d="M9 6.65032C9 6.65032 15.9383 6.10759 16.9154 7.08463C17.8924 8.06167 17.3496 15 17.3496 15M16.5 7.5L6.5 17.5"/>{%- endcapture -%}
+  {%- when 'arrow-down-left' -%}{%- capture d -%}<path d="M15 17.3497C15 17.3497 8.06166 17.8924 7.08461 16.9154C6.10755 15.9383 6.65037 9 6.65037 9M7.5 16.5L17.5 6.5"/>{%- endcapture -%}
+  {%- when 'arrow-left' -%}{%- capture d -%}<path d="M5.5 12.002H19"/><path d="M10.9999 18.002C10.9999 18.002 4.99998 13.583 4.99997 12.0019C4.99996 10.4208 11 6.00195 11 6.00195"/>{%- endcapture -%}
+  {%- when 'arrow-right' -%}{%- capture d -%}<path d="M18.5 12L4.99997 12"/><path d="M13 18C13 18 19 13.5811 19 12C19 10.4188 13 6 13 6"/>{%- endcapture -%}
+  {%- when 'arrow-up' -%}{%- capture d -%}<path d="M12 5.5V19"/><path d="M18 11C18 11 13.5811 5.00001 12 5C10.4188 4.99999 6 11 6 11"/>{%- endcapture -%}
+  {%- when 'arrow-down' -%}{%- capture d -%}<path d="M12 18.502V5.00195"/><path d="M18 13.002C18 13.002 13.5811 19.0019 12 19.002C10.4188 19.002 6 13.002 6 13.002"/>{%- endcapture -%}
+{%- endcase -%}
+<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">{{ d }}</svg>

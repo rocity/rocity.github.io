@@ -264,7 +264,16 @@ strong, b { font-weight: 500; }
 .link--draw:hover::before,
 .link--draw[aria-current]::before { transform: scaleX(1); transform-origin: left; }
 
-/* Text-only actions: ↓ Show More, ↑ Back to top. */
+/* Inline Hugeicons (_includes/icon.html). Sized to the text, nudged onto its x-height. */
+.icon {
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+  vertical-align: -0.2em;
+}
+
+/* Text-only actions: Show More, Back to top. */
 .action {
   display: inline-flex;
   gap: 0.45em;
@@ -396,10 +405,13 @@ strong, b { font-weight: 500; }
 .table__date { font-variant-numeric: tabular-nums; }
 .table__arrow,
 .project-row__arrow,
-.row__arrow { justify-self: end; transition: transform var(--dur-hover) var(--ease-out); }
-.table__row:hover .table__arrow,
-.project-row:hover .project-row__arrow,
-.row:hover .row__arrow { transform: rotate(45deg); }
+.row__arrow { justify-self: end; }
+.table__arrow .icon,
+.project-row__arrow .icon,
+.row__arrow .icon { transition: transform var(--dur-hover) var(--ease-out); }
+.table__row:hover .table__arrow .icon,
+.project-row:hover .project-row__arrow .icon,
+.row:hover .row__arrow .icon { transform: rotate(45deg); }
 
 .table__more { margin-top: 1.6vw; display: flex; justify-content: flex-end; }
 
@@ -717,8 +729,9 @@ strong, b { font-weight: 500; }
   text-align: left;
   border-top: 1px solid var(--rule);
 }
-.acc__arrow { justify-self: end; transition: transform 0.75s var(--ease-out); }
-.acc__btn[aria-expanded='true'] .acc__arrow { transform: rotate(180deg); }
+.acc__arrow { justify-self: end; }
+.acc__arrow .icon { transition: transform 0.75s var(--ease-out); }
+.acc__btn[aria-expanded='true'] .acc__arrow .icon { transform: rotate(180deg); }
 .acc__panel {
   display: grid;
   grid-template-rows: 1fr;

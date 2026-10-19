@@ -10,7 +10,7 @@
       <span class="table__title">{{ post.title }}</span>
       <span class="table__topic f-micro">{{ post.tags | join: ', ' }}</span>
       <time class="table__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%d.%m' }}</time>
-      <span class="table__arrow" aria-hidden="true">↗</span>
+      <span class="table__arrow" aria-hidden="true">{% include icon.html name="arrow-up-right" %}</span>
     </a>
   </li>
   {% endfor %}
@@ -18,7 +18,7 @@
 {% if include.more and include.posts.size > include.more %}
 <p class="table__more">
   <button class="action" type="button" aria-controls="{{ include.id }}" aria-expanded="false" data-more-toggle hidden>
-    <span aria-hidden="true">↓</span><span class="link">Show More</span>
+    <span aria-hidden="true">{% include icon.html name="arrow-down" %}</span><span class="link">Show More</span>
   </button>
 </p>
 {% endif %}

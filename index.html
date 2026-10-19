@@ -57,13 +57,13 @@ photos:
           <span class="project-row__name f-statement">{{ project.name }}</span>
           <span class="project-row__kind">{{ project.kind }}</span>
           <span class="project-row__years">{{ project.years }}</span>
-          <span class="project-row__arrow" aria-hidden="true">↗</span>
+          <span class="project-row__arrow" aria-hidden="true">{% include icon.html name="arrow-up-right" %}</span>
         </a>
       </li>
       {% endfor %}
     </ol>
     <p class="table__more">
-      <a class="action" href="{{ '/work/' | relative_url }}"><span aria-hidden="true">↗</span><span class="link">See the work</span></a>
+      <a class="action" href="{{ '/work/' | relative_url }}"><span aria-hidden="true">{% include icon.html name="arrow-up-right" %}</span><span class="link">See the work</span></a>
     </p>
   </div>
 </section>
@@ -81,7 +81,7 @@ photos:
     <p class="latest__excerpt f-lead" data-split>{{ latest.subtitle }}</p>
     {% endif %}
     <p class="latest__more" data-reveal="fade">
-      <a class="action" href="{{ latest.url | relative_url }}"><span aria-hidden="true">↗</span><span class="link">Read it</span></a>
+      <a class="action" href="{{ latest.url | relative_url }}"><span aria-hidden="true">{% include icon.html name="arrow-up-right" %}</span><span class="link">Read it</span></a>
     </p>
   </article>
 </section>

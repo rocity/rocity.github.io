@@ -19,7 +19,7 @@ layout: base
     {% include photo.html id=page.portrait sizes="(max-width: 580px) 76vw, 44vw" eager=true %}
   </div>
 
-  <a class="bio-hero__down" href="#story" aria-label="Skip to the story" data-reveal="fade" style="--d: 1.2s"><span aria-hidden="true">↓</span></a>
+  <a class="bio-hero__down" href="#story" aria-label="Skip to the story" data-reveal="fade" style="--d: 1.2s"><span aria-hidden="true">{% include icon.html name="arrow-down" %}</span></a>
 
   <ul class="bio-hero__socials" data-reveal="fade" style="--d: 1.3s">
     <li><a class="link" href="mailto:{{ site.author.email }}">Mail</a></li>
@@ -64,7 +64,7 @@ layout: base
       <button class="acc__btn" type="button" id="acc-{{ slug }}-btn" aria-expanded="false" aria-controls="acc-{{ slug }}">
         <span class="f-label">{{ skill.group }}</span>
         <span class="f-micro">{{ skill.items.size | prepend: '0' | slice: -2, 2 }}</span>
-        <span class="acc__arrow" aria-hidden="true">↙</span>
+        <span class="acc__arrow" aria-hidden="true">{% include icon.html name="arrow-down-left" %}</span>
       </button>
     </h3>
     <div class="acc__panel" id="acc-{{ slug }}" role="region" aria-labelledby="acc-{{ slug }}-btn">

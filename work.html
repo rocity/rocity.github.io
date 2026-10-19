@@ -27,7 +27,7 @@ intro: (Things I built end to end, from the database to the deploy. One is a ful
     {% include label.html text=project.number %}
     <p class="f-micro">{{ project.kind }}<br>{{ project.years }}</p>
     <a class="action project__visit" href="{{ project.url }}" target="_blank" rel="noopener">
-      <span aria-hidden="true">↗</span><span class="link">{{ project.domain }}</span>
+      <span aria-hidden="true">{% include icon.html name="arrow-up-right" %}</span><span class="link">{{ project.domain }}</span>
     </a>
   </div>
 
@@ -47,7 +47,7 @@ intro: (Things I built end to end, from the database to the deploy. One is a ful
         {% include media.html base=base alt=shot.alt width=shot.width height=shot.height sizes="(max-width: 580px) 84vw, 55vw" %}
         <span class="shot__cap" aria-hidden="true">
           <span class="f-aside">{{ project.name }}</span>
-          <span>{{ shot.title }} ↗</span>
+          <span>{{ shot.title }} {% include icon.html name="arrow-up-right" %}</span>
         </span>
       </a>
       <figcaption class="f-micro">({{ project.number }}) {{ shot.title }}</figcaption>

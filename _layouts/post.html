@@ -41,13 +41,13 @@ layout: base
     <nav class="pager" aria-label="More posts">
       {% if page.previous.url %}
       <a class="pager__link" href="{{ page.previous.url | relative_url }}" rel="prev">
-        <span class="f-label">← Previous</span>
+        <span class="f-label">{% include icon.html name="arrow-left" %} Previous</span>
         <span class="pager__title f-aside">{{ page.previous.title }}</span>
       </a>
       {% endif %}
       {% if page.next.url %}
       <a class="pager__link pager__link--next" href="{{ page.next.url | relative_url }}" rel="next">
-        <span class="f-label">Next →</span>
+        <span class="f-label">Next {% include icon.html name="arrow-right" %}</span>
         <span class="pager__title f-aside">{{ page.next.title }}</span>
       </a>
       {% endif %}

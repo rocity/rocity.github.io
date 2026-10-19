@@ -15,7 +15,7 @@
       <a class="row" href="{{ social.url }}" rel="me noopener" target="_blank">
         <span class="f-label">{{ social.name }}</span>
         <span>{{ social.handle }}</span>
-        <span class="row__arrow" aria-hidden="true">↗</span>
+        <span class="row__arrow" aria-hidden="true">{% include icon.html name="arrow-up-right" %}</span>
       </a>
     </li>
     {% endfor %}

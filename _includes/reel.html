@@ -18,7 +18,7 @@
         {%- endif -%}
       {%- endfor -%}
     {%- endfor %}
-    <span class="reel__cta f-label"><span aria-hidden="true">↗</span> View work</span>
+    <span class="reel__cta f-label"><span aria-hidden="true">{% include icon.html name="arrow-up-right" %}</span> View work</span>
   </div>
   {%- assign first = site.data.projects.first %}
   <span class="reel__cap f-micro" data-reveal="fade" style="--d: 1.1s">
