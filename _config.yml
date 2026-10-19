@@ -24,8 +24,11 @@ description: Software engineering
 # Three words floating on the canvas: left group, right group.
 nav:
   left:
+    - title: Work
+      url: /work
     - title: Writing
-      url: /
+      url: /#writing
+      active-on: post   # stays underlined while reading a post
     - title: Bio
       url: /aboutme
   right:

@@ -1,6 +1,6 @@
 {%- comment -%}
-  Three words floating on the canvas: Writing · Bio (left), Contact (right).
-  "Writing" stays underlined while reading a post.
+  A few words floating on the canvas: site.nav.left and site.nav.right.
+  A link with `active-on: <layout>` stays underlined on pages of that layout.
 {%- endcomment -%}
 {%- assign current = page.url | remove: 'index.html' | remove: '.html' | append: '/' | replace: '//', '/' -%}
 <nav class="nav wrap" aria-label="Primary">
@@ -10,7 +10,7 @@
       {%- assign path = link.url | append: '/' | replace: '//', '/' -%}
       {%- assign active = false -%}
       {%- if path == current -%}{%- assign active = true -%}{%- endif -%}
-      {%- if link.url == '/' and page.layout == 'post' -%}{%- assign active = true -%}{%- endif %}
+      {%- if link.active-on and link.active-on == page.layout -%}{%- assign active = true -%}{%- endif %}
     <li><a class="link link--draw" href="{% if link.url contains '#' %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}"{% if active %} aria-current="{% if page.layout == 'post' %}true{% else %}page{% endif %}"{% endif %}>{{ link.title }}</a></li>
     {%- endfor %}
   </ul>

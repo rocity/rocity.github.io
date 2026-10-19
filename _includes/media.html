@@ -1,0 +1,12 @@
+{%- comment -%}
+  A revealing image with 1000w/1600w sources: <base>-1000.jpg, <base>-1600.jpg.
+  Params: base, alt, width, height (of the 1600 version), sizes (CSS width of
+  the slot; defaults to 100vw), eager.
+{%- endcomment -%}
+<div class="media" data-reveal="media">
+  <img src="{{ include.base | append: '-1000.jpg' | relative_url }}"
+       srcset="{{ include.base | append: '-1000.jpg' | relative_url }} 1000w, {{ include.base | append: '-1600.jpg' | relative_url }} 1600w"
+       sizes="{{ include.sizes | default: '100vw' }}"
+       alt="{{ include.alt | escape }}" width="{{ include.width }}" height="{{ include.height }}"
+       {% unless include.eager %}loading="lazy" {% endunless %}decoding="async">
+</div>

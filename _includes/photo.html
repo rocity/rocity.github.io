@@ -1,13 +1,6 @@
 {%- comment -%}
-  One photo from _data/photos.yml, with 1000w/1600w sources and a reveal.
-  Params: id, sizes (CSS width of the slot; defaults to 100vw), eager.
+  One photo from _data/photos.yml. Params: id, sizes, eager.
 {%- endcomment -%}
 {%- assign photo = site.data.photos[include.id] -%}
 {%- capture base -%}/img/photos/{{ include.id }}{%- endcapture -%}
-<div class="media" data-reveal="media">
-  <img src="{{ base | append: '-1000.jpg' | relative_url }}"
-       srcset="{{ base | append: '-1000.jpg' | relative_url }} 1000w, {{ base | append: '-1600.jpg' | relative_url }} 1600w"
-       sizes="{{ include.sizes | default: '100vw' }}"
-       alt="{{ photo.alt | escape }}" width="{{ photo.width }}" height="{{ photo.height }}"
-       {% unless include.eager %}loading="lazy" {% endunless %}decoding="async">
-</div>
+{% include media.html base=base alt=photo.alt width=photo.width height=photo.height sizes=include.sizes eager=include.eager %}

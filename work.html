@@ -1,0 +1,77 @@
+---
+layout: base
+title: Work
+permalink: /work/
+subtitle: Selected work by Kevin Kalis — products built end to end, from database to deploy.
+intro: (Things I built end to end, from the database to the deploy. One is a full-blown CRM. The other tells you when to take pictures.)
+---
+
+{% assign projects = site.data.projects %}
+
+<header class="work-head wrap grid">
+  <h1 class="work-head__mark f-hero" data-reveal="lines">
+    <span class="line"><span>Selected</span></span>
+    <span class="line"><span>work<small class="orn">({{ projects.size | prepend: '0' | slice: -2, 2 }})</small></span></span>
+  </h1>
+  <p class="work-head__intro f-aside" data-split style="--d: 0.6s">{{ page.intro }}</p>
+  <ol class="work-head__index" data-reveal="fade" style="--d: 1s">
+    {% for project in projects %}
+    <li><a class="link link--draw" href="#{{ project.id }}">({{ project.number }}) {{ project.name }}</a></li>
+    {% endfor %}
+  </ol>
+</header>
+
+{% for project in projects %}
+<article class="project section wrap grid" id="{{ project.id }}" aria-labelledby="{{ project.id }}-name">
+  <div class="rail project__meta">
+    {% include label.html text=project.number %}
+    <p class="f-micro">{{ project.kind }}<br>{{ project.years }}</p>
+    <a class="action project__visit" href="{{ project.url }}" target="_blank" rel="noopener">
+      <span aria-hidden="true">↗</span><span class="link">{{ project.domain }}</span>
+    </a>
+  </div>
+
+  <div class="field">
+    <h2 class="project__name f-display" id="{{ project.id }}-name" data-reveal="lines">
+      <span class="line"><span>{{ project.name }}</span></span>
+    </h2>
+    <p class="project__tagline f-statement" data-split>{{ project.tagline }}</p>
+    <p class="project__summary f-lead" data-split>{{ project.summary }}</p>
+  </div>
+
+  <div class="project__shots collage">
+    {% for shot in project.shots %}
+    {% capture base %}/img/work/{{ shot.id }}{% endcapture %}
+    <figure class="tile{% if shot.end %} tile--end{% endif %}" style="--col: {{ shot.col }}{% if shot.mcol %}; --mcol: {{ shot.mcol }}{% endif %}">
+      <a class="shot" href="{{ project.url }}" target="_blank" rel="noopener">
+        {% include media.html base=base alt=shot.alt width=shot.width height=shot.height sizes="(max-width: 580px) 84vw, 55vw" %}
+        <span class="shot__cap" aria-hidden="true">
+          <span class="f-aside">{{ project.name }}</span>
+          <span>{{ shot.title }} ↗</span>
+        </span>
+      </a>
+      <figcaption class="f-micro">({{ project.number }}) {{ shot.title }}</figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+
+  {% if project.stat %}
+  <div class="project__stat field">
+    <p class="stat f-chapter" data-reveal="lines">
+      <span class="line"><span><span class="roll" data-roll>{{ project.stat.value }}</span></span></span>
+      <span class="line"><span>{{ project.stat.unit }}</span></span>
+    </p>
+    <p class="stat__caption f-micro" data-reveal="fade" style="--d: 0.6s">{{ project.stat.caption }}</p>
+  </div>
+  {% endif %}
+
+  <dl class="project__details field">
+    {% for row in project.details %}
+    <div class="spec" data-reveal="fade" style="--d: {{ forloop.index0 | times: 0.08 }}s">
+      <dt class="f-label">{{ row[0] }}</dt>
+      <dd>{{ row[1] }}</dd>
+    </div>
+    {% endfor %}
+  </dl>
+</article>
+{% endfor %}

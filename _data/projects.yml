@@ -1,0 +1,72 @@
+# Portfolio projects, in display order. Feeds /work, the home hero reel and
+# the home "Selected work" list.
+#
+# Screenshots live in img/work/<id>-1000.jpg and <id>-1600.jpg (long edge).
+# Each shot: col / mcol place it on the 12-column grid (desktop / under
+# 580px; mcol defaults to full width); end: true sits it on the row's bottom
+# edge; reel: true includes it in the home hero reel.
+
+- id: silid
+  number: "01"
+  name: Silid
+  kind: Real estate platform
+  years: /25 — /26
+  url: https://silid.ph/
+  domain: silid.ph
+  tagline: “Pasok ka sa iyong Silid.”
+  summary: >-
+    A subscription platform for Philippine real estate. Buyers browse verified
+    listings, book viewings and message owners directly. Owners build and boost
+    listings. Agents and agencies get lead management, commission tracking, a
+    document vault and licence-expiry alerts.
+  stat:
+    value: "1,255"
+    unit: commits
+    caption: Frontend and backend, one author<br>(as of Oct /26)
+  details:
+    - [Frontend, "Next.js 15, TypeScript, Tailwind CSS, Leaflet"]
+    - [Backend, "NestJS on Fastify, Prisma, PostgreSQL, Redis, Socket.IO"]
+    - [Ops, "Docker, Caddy, DigitalOcean, Sentry, PostHog"]
+    - [Status, "Live"]
+  shots:
+    - { id: silid-home, title: Home, width: 1600, height: 1000, col: 4 / 12, reel: true,
+        alt: "Silid's home page: “Pasok ka sa iyong Silid.” over a city skyline at dusk, with a property search bar" }
+    - { id: silid-listings, title: Listings, width: 1600, height: 1000, col: 2 / 8, reel: true,
+        alt: "Silid's “Discover your next home” section with four verified house listings and their prices" }
+    - { id: silid-mobile, title: Mobile, width: 739, height: 1600, col: 8 / 10, end: true, mcol: 1 / 6,
+        alt: "Silid's home page on a phone" }
+    - { id: silid-agencies, title: Agencies, width: 1600, height: 1000, col: 6 / 12, mcol: 6 / -1, end: true,
+        alt: "Silid's agency section, “Built for agencies that want to scale.”, beside a dashboard of agents, listings and commissions" }
+    - { id: silid-search, title: Search, width: 1600, height: 1000, col: 3 / 8,
+        alt: "Silid search results: model houses with prices, rooms and floor area" }
+
+- id: walkplanner
+  number: "02"
+  name: Walkplanner
+  kind: AI photo-walk planner
+  years: /26
+  url: https://walkplanner.kevkalis.com/
+  domain: walkplanner.kevkalis.com
+  tagline: Street photography walks, timed to the light.
+  summary: >-
+    Pick an area of Singapore and a time window. An AI agent plans a walkable
+    loop, schedules each stop for the light (golden hour, backlight or shade)
+    and suggests a shot for every stop. The map shows where the sun and
+    building shadows fall at any time of day.
+  stat:
+    value: "43"
+    unit: commits
+    caption: Idea to live site<br>in five days
+  details:
+    - [Agent, "LangGraph.js on OpenRouter"]
+    - [Backend, "Bun, Fastify, Drizzle, PostgreSQL + PostGIS"]
+    - [Map & routing, "MapLibre GL, OpenStreetMap, Valhalla, SunCalc"]
+    - [Frontend, "React, TanStack Router"]
+    - [Status, "Live"]
+  shots:
+    - { id: walkplanner-map, title: Planner, width: 1600, height: 1000, col: 3 / 11, reel: true,
+        alt: "Walkplanner's planner: a dark map of Singapore beside a walk form and a legend of light conditions along the route" }
+    - { id: walkplanner-mobile, title: Mobile, width: 739, height: 1600, col: 2 / 4, end: true, mcol: 1 / 6,
+        alt: "Walkplanner's map and walk form on a phone" }
+    - { id: walkplanner-about, title: About, width: 1600, height: 1000, col: 5 / 11, mcol: 6 / -1, end: true, reel: true,
+        alt: "Walkplanner's about page explaining what it does and how a walk is planned" }

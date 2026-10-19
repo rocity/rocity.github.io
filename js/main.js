@@ -5,6 +5,7 @@
 //   data-roll           odometer digits
 //   data-more           collapse a long list behind "Show More"
 //   .acc__btn           accordion rows
+//   data-reel           crossfading portfolio reel in the home hero
 //   .wipe               ink panel between page loads
 
 (function () {
@@ -136,7 +137,12 @@
         reveal(entry.target);
       });
     }, { rootMargin: '0px 0px -10% 0px' });
-    targets.forEach(function (el) { observer.observe(el); });
+    targets.forEach(function (el) {
+      // Anything on the first screen plays as part of the intro, even if it
+      // sits inside the observer's bottom margin.
+      if (el.getBoundingClientRect().top < window.innerHeight) reveal(el);
+      else observer.observe(el);
+    });
   }
 
 
@@ -174,6 +180,41 @@
       button.setAttribute('aria-expanded', String(open));
       panel.classList.toggle('is-open', open);
     });
+  });
+
+
+  /* Hero reel -------------------------------------------------------------- */
+
+  // Crossfades the portfolio screenshots. Holds still on hover/focus, while
+  // off-screen, and entirely under reduced motion.
+  $$('[data-reel]').forEach(function (reel) {
+    var frames = $$('.reel__img', reel);
+    var caption = reel.querySelector('[data-reel-caption]');
+    if (reduced || frames.length < 2) return;
+
+    var index = 0;
+    var held = false;
+    var visible = true;
+
+    setInterval(function () {
+      if (held || !visible || document.hidden) return;
+      frames[index].classList.remove('is-active');
+      index = (index + 1) % frames.length;
+      frames[index].classList.add('is-active');
+      if (caption) caption.textContent = frames[index].getAttribute('data-caption');
+    }, 3600);
+
+    ['mouseenter', 'focusin'].forEach(function (type) {
+      reel.addEventListener(type, function () { held = true; });
+    });
+    ['mouseleave', 'focusout'].forEach(function (type) {
+      reel.addEventListener(type, function () { held = false; });
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+      }).observe(reel);
+    }
   });
 
 

@@ -1,0 +1,28 @@
+{%- comment -%}
+  Home hero reel: cycles the project screenshots marked `reel: true` in
+  _data/projects.yml and links to /work. js/main.js drives the cycle.
+{%- endcomment -%}
+<a class="hero__reel reel" href="{{ '/work/' | relative_url }}" data-reel>
+  <div class="reel__frame media" data-reveal="media" style="--d: 0.3s">
+    {%- assign n = 0 -%}
+    {%- for project in site.data.projects -%}
+      {%- for shot in project.shots -%}
+        {%- if shot.reel %}
+    {% capture base %}/img/work/{{ shot.id }}{% endcapture -%}
+    <img class="reel__img{% if n == 0 %} is-active{% endif %}"
+         src="{{ base | append: '-1000.jpg' | relative_url }}"
+         srcset="{{ base | append: '-1000.jpg' | relative_url }} 1000w, {{ base | append: '-1600.jpg' | relative_url }} 1600w"
+         sizes="(max-width: 580px) 84vw, 30vw" alt="" width="{{ shot.width }}" height="{{ shot.height }}"
+         data-caption="({{ project.number }}) {{ project.name }} — {{ shot.title }}"{% if n > 0 %} loading="lazy"{% endif %} decoding="async">
+          {%- assign n = n | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor %}
+    <span class="reel__cta f-label"><span aria-hidden="true">↗</span> View work</span>
+  </div>
+  {%- assign first = site.data.projects.first %}
+  <span class="reel__cap f-micro" data-reveal="fade" style="--d: 1.1s">
+    <span class="reel__label">Selected work</span>
+    <span data-reel-caption>({{ first.number }}) {{ first.name }} — {{ first.shots.first.title }}</span>
+  </span>
+</a>

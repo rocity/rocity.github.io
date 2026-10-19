@@ -3,7 +3,7 @@ layout: base
 handle: rocity
 bio: >-
   Software engineer based in the Philippines.<br>
-stack: [Field, Notes]
+stack: [Selected, Work]
 # Photos from _data/photos.yml, staggered on the 12-column grid.
 # col: desktop columns; mcol: columns under 580px (default full width);
 # end: true sits a tile on the bottom edge of its row.
@@ -33,16 +33,40 @@ photos:
 
   <a class="hero__email link" href="mailto:{{ site.author.email }}" data-reveal="fade" style="--d: 1.1s">{{ site.author.email }}</a>
 
-  <p class="hero__stack f-stack" data-reveal="lines" style="--d: 0.5s">
+  <a class="hero__stack f-stack" href="{{ '/work/' | relative_url }}" data-reveal="lines" style="--d: 0.5s">
     {% for word in page.stack %}<span class="line"><span>{{ word }}</span></span> {% endfor %}
     <span class="line"><span>{{ site.time | date: '%Y' }}<small class="orn">©</small></span></span>
-  </p>
+  </a>
+
+  {% include reel.html %}
 
   <div class="hero__aside" data-reveal="fade" style="--d: 1.2s">
     <p class="hero__handle f-aside"><span class="spin" aria-hidden="true">*</span> ({{ page.handle }})</p>
     <p class="hero__bio">{{ page.bio }}</p>
   </div>
 </header>
+
+<section class="section wrap grid" aria-labelledby="selected-label">
+  <div class="rail">{% include label.html text="Selected work" id="selected-label" %}</div>
+  <div class="field">
+    <ol class="projects">
+      {% for project in site.data.projects %}
+      <li>
+        <a class="project-row" href="{{ '/work/' | relative_url }}#{{ project.id }}">
+          <span class="project-row__num f-micro">({{ project.number }})</span>
+          <span class="project-row__name f-statement">{{ project.name }}</span>
+          <span class="project-row__kind">{{ project.kind }}</span>
+          <span class="project-row__years">{{ project.years }}</span>
+          <span class="project-row__arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ol>
+    <p class="table__more">
+      <a class="action" href="{{ '/work/' | relative_url }}"><span aria-hidden="true">↗</span><span class="link">See the work</span></a>
+    </p>
+  </div>
+</section>
 
 <section class="section wrap grid" id="writing" aria-labelledby="latest-label">
   <div class="rail">{% include label.html text="Latest" id="latest-label" %}</div>
